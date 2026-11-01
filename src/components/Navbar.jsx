@@ -15,7 +15,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="text-xl font-bold text-cyan-400 tracking-wider">
-          Portfolio<span className="text-white">.</span>
+          Gurpreet Kaur<span className="text-white">.</span>
         </a>
 
         {/* Desktop Links */}

@@ -1,14 +1,50 @@
 import React, { useState } from 'react';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+  name: "",
+  email: "",
+  message: "",
+});
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const [submitted, setSubmitted] = useState(false);
+const [loading, setLoading] = useState(false);
+const [error, setError] = useState("");
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  setLoading(true);
+  setError("");
+  setSubmitted(false);
+
+  try {
+    const response = await fetch("http://localhost:5000/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || "Unable to send your message.");
+    }
+
     setSubmitted(true);
-    // Yahan aap apna backend ya email sending logic integrate kar sakte hain
-  };
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+    });
+  } catch (err) {
+    setError(err.message || "Something went wrong. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <section id="contact" className="py-24 px-6 bg-slate-950">
@@ -65,12 +101,16 @@ export default function Contact() {
                   className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
                 />
               </div>
-
+              {error && (
+                <p className="text-red-400 text-sm" role="alert">
+                  {error}
+                </p>
+              )}
               <button
                 type="submit"
-                className="w-full bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-semibold py-3 rounded-lg transition-all shadow-lg shadow-cyan-500/20"
+                className="w-full bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-semibold py-3 rounded-lg transition-all shadow-lg shadow-cyan-500/20" disabled={loading}
               >
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
               </button>
             </form>
           )}

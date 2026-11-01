@@ -15,8 +15,9 @@ export default function About() {
         {/* About Content Card */}
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xl">
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            I am a passionate <span className="text-cyan-400 font-medium">Frontend Developer</span> with a strong foundation in building modern, responsive, and user-centric web applications. Over the years, I have honed my expertise in turning design concepts into clean, high-performing code.
+            I am a <span className="text-cyan-400 font-medium">Frontend Developer</span> with 6 years of experience in web development and UI implementation. My work involves translating design concepts into functional interfaces while maintaining visual consistency, usability, and clean code.
           </p>
+           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">I value attention to detail, thoughtful implementation, and creating web experiences that work smoothly across different devices.</p>
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
             I love learning new technologies, solving complex UI challenges, and continuously improving user experiences. My goal is to build digital products that are not only visually appealing but also scalable and efficient.
           </p>
@@ -29,7 +30,7 @@ export default function About() {
             </div>
             <div>
               <span className="text-slate-500 text-sm block">Focus</span>
-              <span className="text-slate-200 font-medium">React.js & Tailwind CSS</span>
+              <span className="text-slate-200 font-medium">React.js & Modern UI Development</span>
             </div>
           </div>
         </div>

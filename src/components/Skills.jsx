@@ -2,19 +2,26 @@ import React from 'react';
 
 export default function Skills() {
   const skillsList = [
-    { name: 'React.js', level: 'Advanced' },
+    { name: 'React.js', level: 'Intermediate' },
     { name: 'JavaScript (ES6+)', level: 'Advanced' },
     { name: 'HTML5 / CSS3', level: 'Expert' },
     { name: 'Tailwind CSS', level: 'Advanced' },
     { name: 'Bootstrap', level: 'Proficient' },
-    { name: 'Git & GitHub', level: 'Intermediate' },
-    { name: 'Responsive Design', level: 'Advanced' },
+    { name: 'Laravel Blade', level: 'Proficient' },
+    { name: 'WordPress', level: 'Proficient' },
+    { name: 'Responsive Web Design', level: 'Advanced' },
+    { name: '	Git & GitHub', level: 'Intermediate' },
+    { name: 'jQuery', level: 'Proficient' },
+    { name: 'TypeScript', level: 'Beginner' },
+    { name: '	Figma & Adobe XD', level: 'Proficient' },
+    { name: 'REST API Integration', level: 'Intermediate' },
     { name: 'Express.js (Basic)', level: 'Beginner' },
+    { name: 'Next.js (Basic)', level: 'Beginner' },
   ];
 
   return (
     <section id="skills" className="py-24 px-6 bg-slate-950">
-      <div className="max-w-4xl mx-auto space-y-10">
+      <div className="max-w-5xl mx-auto space-y-10">
         {/* Section Heading */}
         <div className="text-center space-y-2">
           <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
