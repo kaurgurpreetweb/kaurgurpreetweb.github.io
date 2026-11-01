@@ -107,9 +107,9 @@ export default function Projects() {
 
     {
       title: 'Portfolio Website',
-      description: 'Designed and developed a modern, responsive personal portfolio website to showcase my frontend development skills, professional projects, technical expertise, and background. Focused on clean UI, intuitive navigation, and a consistent user experience across devices.',
-      tech: ['HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS', 'Vite'],
-      category: 'Frontend Development, Web Development',
+      description: 'Designed and developed a modern, responsive personal portfolio website to showcase my frontend development skills, professional projects, technical expertise, and background. Focused on clean UI, intuitive navigation, and a consistent user experience across devices. Integrated a contact form with a Node.js and Express.js backend using a REST API and Resend for email delivery.',
+      tech: ['HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS', 'Vite', 'React', 'Node.js', 'Express.js', 'REST API', 'Resend'],
+      category: 'Web Development | Frontend Development | Full-Stack Integration',
       liveLink: 'https://kaurgurpreetweb.github.io/',
       githubLink: '#',
     },
