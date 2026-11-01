@@ -1,7 +1,6 @@
-
 const express = require("express");
-const nodemailer = require("nodemailer");
 const cors = require("cors");
+const { Resend } = require("resend");
 require("dotenv").config();
 
 const app = express();
@@ -9,13 +8,13 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin:
+      process.env.FRONTEND_URL || "http://localhost:5173",
   })
 );
 
 app.use(express.json());
 
-// Test route
 app.get("/api/health", (req, res) => {
   res.json({
     success: true,
@@ -23,7 +22,6 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-// Contact form route
 app.post("/api/contact", async (req, res) => {
   try {
     const { name, email, message } = req.body;
@@ -67,31 +65,33 @@ app.post("/api/contact", async (req, res) => {
       });
     }
 
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    if (!process.env.RESEND_API_KEY || !process.env.EMAIL_USER) {
       return res.status(503).json({
         success: false,
         message: "Email service is not configured yet.",
       });
     }
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-    
-    await transporter.verify();
-    console.log("Gmail SMTP connection successful!");
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
-    await transporter.sendMail({
-      from: `"Portfolio Contact Form" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER,
+    const { data, error } = await resend.emails.send({
+      from: "Portfolio Contact <onboarding@resend.dev>",
+      to: [process.env.EMAIL_USER],
       replyTo: email.trim(),
       subject: `Portfolio message from ${name.trim()}`,
       text: `Name: ${name.trim()}\nEmail: ${email.trim()}\n\nMessage:\n${message.trim()}`,
     });
+
+    if (error) {
+      console.error("Resend error:", error.message);
+
+      return res.status(500).json({
+        success: false,
+        message: "Unable to send your message. Please try again later.",
+      });
+    }
+
+    console.log("Contact email sent:", data?.id);
 
     return res.status(200).json({
       success: true,
@@ -107,6 +107,6 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Portfolio backend running on port ${PORT}`);
 });
